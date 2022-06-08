@@ -6,6 +6,7 @@ We can use hashing to generate a unique hash for the given long url. This can el
 
 1. Hash would be longer in length
 2. We will not be able to store any reporting data such as created_at, count of visits etc
+3. Reverse mapping from slug to redirection cannot happen
 
 ## Error Handling
 
