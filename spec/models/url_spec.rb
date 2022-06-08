@@ -99,4 +99,14 @@ RSpec.describe Url, type: :model do
       expect(subject.to_api).to be_a(Hash)
     end
   end
+
+  describe 'collision for generate slug' do
+    it 'should try to generate slug again if collision happens while creation' do
+      allow(Url).to receive(:random_slug_string).and_return('abcde', 'abcde', 'abcde', 'somet')
+      url = described_class.find_or_create!(long_url: 'https://www.apple.com')
+      expect(url.slug).to eq('abcde')
+      url2 = described_class.find_or_create!(long_url: 'https://www.google.com')
+      expect(url2.slug).to eq('somet')
+    end
+  end
 end

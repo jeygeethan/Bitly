@@ -28,10 +28,14 @@ class Url < ApplicationRecord
   private
 
   def generate_slug
-    self.slug = random_slug_string
+    random_slug = self.class.random_slug_string
+    while Url.where(slug: random_slug).present?
+      random_slug = self.class.random_slug_string
+    end
+    self.slug = random_slug
   end
 
-  def random_slug_string
+  def self.random_slug_string
     [*'a'..'z', *0..9, *'A'..'Z'].shuffle[0...SLUG_LENGTH].join
   end
 end
