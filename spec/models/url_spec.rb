@@ -88,4 +88,15 @@ RSpec.describe Url, type: :model do
       expect(url).to eq(subject)
     end
   end
+
+  describe '#to_api' do
+    subject {
+      described_class.find_or_create!(long_url: 'https://www.apple.com')
+    }
+
+    it 'should return hash for valid url' do
+      expect(subject.to_api).to_not be_nil
+      expect(subject.to_api).to be_a(Hash)
+    end
+  end
 end

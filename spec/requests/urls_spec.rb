@@ -94,6 +94,5 @@ RSpec.describe "Urls", type: :request do
       post urls_create_path, params: { }
       expect(response.status).to eq(400)
     end
-
   end
 end
