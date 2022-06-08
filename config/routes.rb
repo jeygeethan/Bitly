@@ -5,4 +5,7 @@ Rails.application.routes.draw do
     get 'urls' => 'urls#show', as: :show
     post 'urls' => 'urls#create', as: :create
   end
+
+  get '/:slug' => 'root#index', as: :root_router
+  root to: 'root#index'
 end
