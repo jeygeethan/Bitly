@@ -11,10 +11,18 @@ class Url < ApplicationRecord
     long_url.strip!
     return nil if long_url.blank?
 
-    url = Url.where(long_url: long_url.strip).first
+    url = Url.where(long_url: long_url).first
     return url if url.present?
 
-    Url.create!(long_url: long_url.strip)
+    Url.create!(long_url: long_url)
+  end
+
+  def to_api
+    {
+      long_url: long_url,
+      slug: slug,
+      created_at: created_at
+    }
   end
 
   private
